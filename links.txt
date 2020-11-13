@@ -1,0 +1,4 @@
+ ADD THE BOT  https://discord.com/oauth2/authorize?client_id=XXXXXXXXXXXX&scope=bot&permissions=8
+
+
+https://www.epicgames.com/store/en-US/free-games
