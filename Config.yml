@@ -1,0 +1,25 @@
+# The name of environment variable that contain boot token.
+Bot Token Variable Name: Epic_Free_Game_BotToken
+
+# The prefix that the bot uses for all commands.
+Prefix: "$"
+
+# The "Playing ____"status of the bot.
+# NOTE: Use "{prefix}" as a placeholder for command prefix.
+Playing Status: "{prefix}help"
+
+#The ID of the text channel where all log messages would be sent.
+Log Channel ID: 776721789644439553
+
+#Settings for embed message that bot sends.
+Embed Settings:
+  #RGB values
+  Color:
+    r: 123
+    g: 24
+    b: 214
+  
+  #Setting for embedd footer that bot will use.
+  Footer:
+    Text: Your Footer text!
+    Icon URL: https://flipweb.org/wp-content/uploads/2019/06/Free.Games_.jpg

@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from csv import writer
+#from csv import writer
 
 epic_link='https://www.epicgames.com/store/en-US/free-games'
 response = requests.get(epic_link)
