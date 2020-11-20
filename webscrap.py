@@ -1,23 +1,25 @@
-import requests
+import requests as requests
 from bs4 import BeautifulSoup
-#from csv import writer
+import sys
+import json
+# ['data']['Catalog']['searchStore']['elements']['0']['title']
+#['data']['Catalog']['searchStore']['elements']['0']['description']
+# ['data']['Catalog']['searchStore']['elements']['0']['effectiveDate']
+# ['data']['Catalog']['searchStore']['elements']['0']['keyImages']
 
-epic_link='https://www.epicgames.com/store/en-US/free-games'
-response = requests.get(epic_link)
 
-soup = BeautifulSoup(response.text, 'html.parser')
+url='https://www.epicgames.com/store/en-US/free-games'
+urlb='https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=IN&allowCountries=IN'
+r = requests.get(urlb)
+if(r.status_code == 200):
+    jsonData = r.xml()['data']['Catalog']['searchStore']['elements']['0']['title']
+    
+else:
+    print("Error receiving data", r.status_code)
 
-posts = soup.find_all(class_='post-preview')
-"""
-with open('posts.csv', 'w') as csv_file:
-    csv_writer = writer(csv_file)
-    headers = ['Title', 'Link', 'Date']
-    csv_writer.writerow(headers)
+print(jsonData)
 
-    for post in posts:
-        title = post.find(class_='post-title').get_text().replace('\n', '')
-        link = post.find('a')['href']
-        date = post.select('.post-date')[0].get_text()
-        print("....",title,date,link)
-        csv_writer.writerow([title, link, date])
-"""
+# with open("test.txt","w", encoding="utf-8") as f:
+#     print(jsonData,file=f)
+
+
