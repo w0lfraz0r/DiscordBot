@@ -1,10 +1,18 @@
 ADD_THE_BOT=https://discord.com/oauth2/authorize?client_id=766177197667909662&scope=bot&permissions=37211328
 
 
-URL to =https://www.epicgames.com/store/en-US/free-games
+URL =https://www.epicgames.com/store/en-US/free-games
+URLB ='https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=IN&allowCountries=IN'
 
 package needed
 pip install discord.py 
 pip install bs4
 requests present in standard library
 pip install ruamel.yaml
+pip install lxml
+
+TOKEN= in your environment variables
+
+refrences used for webscraping
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/#xml
+https://towardsdatascience.com/xml-scraping-done-right-6ac66eef9efc
