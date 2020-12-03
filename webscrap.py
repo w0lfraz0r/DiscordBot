@@ -1,75 +1,45 @@
+''' webscrap.py '''
 from bs4 import BeautifulSoup
 from bs4.element import Comment
-# import pandas as pd
-# import numpy as np
+import json
 import requests
 # ['data']['Catalog']['searchStore']['elements']['0']['title']
 #['data']['Catalog']['searchStore']['elements']['0']['description']
 # ['data']['Catalog']['searchStore']['elements']['0']['effectiveDate']
 # ['data']['Catalog']['searchStore']['elements']['0']['keyImages']
 
-
-url='https://www.epicgames.com/store/en-US/free-games'
+urlsamp='https://www.epicgames.com/store/en-US/browse?q={}&sortBy=relevance&sortDir=DESC&pageSize=30'
 urlb='https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=IN&allowCountries=IN'
+name =""
+url=""
+imgurl=""
 
-xml_data = requests.get(urlb).content
-print(xml_data)
-goodData=dict(xml_data)
-print("\n\n\n")
-print("ho hi ha ho")
-print(goodData)
-soup = BeautifulSoup(xml_data, "lxml")
- 
-# Find all text in the data
-# texts = str(soup.findAll(text=True)).replace('\\n','')
-    
-#Find the tag/child
-child = soup.find("elements")
-    
-Title = []
-Description = []
-EffectiveDate = []
-KeyImagesurl = []
-EndDate = []
+def remove_special(a_string):
+    alphanumeric = ""
+    for character in a_string:
+        if character.isalnum():
+            alphanumeric += character
+    return alphanumeric
+
 
     
-while True:    
-    try:
-        Description.append(" ".join(child.find('description')))
-    except:
-        Description.append(" ")
-            
-    try:
-        Title.append(" ".join(child.find('title')))
-    except:
-        Title.append(" ")
-        
-    try:
-        EffectiveDate.append(" ".join(child.find('effectiveDate')))
-    except:
-        EffectiveDate.append(" ")
-            
-    try:
-        EndDate.append(" ".join(child.find('endDate')))
-    except:
-        EndDate.append(" ")
-        
-    try:   
-        # Next sibling of child, here: entry 
-        child = child.find_next_sibling('entry')
-    except:
-        break
+
+def find_game():
+    json_data = requests.get(urlb).json()
+    # print(json_data)
+    d_data = json_data['data']['Catalog']['searchStore']['elements']
+    # size_of_list = len(d_data)
+    # for i in range(size_of_list):
+    name = d_data[0]['title']
+    url=urlsamp.format(remove_special(d_data[0]['title']))
+    # imgurl=d_data[0]['keyImages']['url']
+    return([name,url])
+
     
-data = []
-# data = pd.DataFrame({"updated":updated,
-#                                     "Title":Title,
-#                                     "EffectiveDate":EffectiveDate,
-#                                     "rating":rating,
-#                                     "user_name":user_name})
-# final_data = final_data.append(data, ignore_index = True)
-print("Title",Title)
-print("Description",Description)
-print("EffectiveDate",EffectiveDate)
-print("KeyImagesurl",KeyImagesurl)
-print("EndDate",EndDate)
+    
+
+
+print(find_game())
+
+
 

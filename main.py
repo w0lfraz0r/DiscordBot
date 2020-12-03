@@ -1,8 +1,12 @@
 import discord
 import datetime
+# from goto import goto, comefrom, label
+import time as t
 from discord.ext import commands as commands
 from ruamel.yaml import YAML
 import os
+import webscrap as w
+# our user defined module
 
 yaml = YAML()
 
@@ -48,8 +52,27 @@ async def on_ready():
 
     bot.log_channel = bot.get_channel(log_channel_id)
     await bot.log_channel.send(embed=embed)
-    #await log_channel.send(content ="Here is your free game - https://www.epicgames.com/store/en-US/free-games ")
-
+    
+    # label .myLabel
+    game_info = w.find_game() #returns list containg name and url of the game
+    today = t.localtime(t.time())
+    print("reached here 1")
+    if today.tm_mday == 3:
+        if today.tm_hour >= 21 and today.tm_min>35:
+            print("reached here 2")
+            
+            await bot.log_channel.send(channel=log_channel_id,content="Here is your free Game\n Name : {}\nPlease Click here : {}".format(game_info[0],game_info[1]))
+        else:
+            print("reached here 3")
+            # sleep for 1 hr
+            await bot.log_channel.send(channel=log_channel_id,content="Here is your free Game\n Name : {}\nPlease Click here : {}".format(game_info[0],game_info[1]))
+            t.sleep(3600)
+            # goto .mylable
+    else :
+        print("reached here 2")
+        t.sleep(86400) #1 day
+        # goto .mylable 
+    
 
 @bot.command(name ="restart", aliases=["r"], help="Restart the bot")
 async def restart(ctx):
