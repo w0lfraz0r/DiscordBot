@@ -65,7 +65,7 @@ async def on_ready():
         else:
             print("reached here 3")
             # sleep for 1 hr
-            await bot.log_channel.send(channel=log_channel_id,content="Here is your free Game\n Name : {}\nPlease Click here : {}".format(game_info[0],game_info[1]))
+            # await bot.log_channel.send(channel=log_channel_id,content="Here is your free Game\n Name : {}\nPlease Click here : {}".format(game_info[0],game_info[1]))
             t.sleep(3600)
             # goto .mylable
     else :
